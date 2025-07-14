@@ -1,0 +1,24 @@
+// File: api/v1/carriers.json
+{
+  "dataSource": "TCRA National Numbering Plan (June 2020)",
+  "disclaimer": "This data represents the original carrier assignment. Numbers may have been ported to other networks.",
+  "prefixes": {
+    "065": "MIC Tanzania PLC (Tigo)",
+    "067": "MIC Tanzania PLC (Tigo)",
+    "071": "MIC Tanzania PLC (Tigo)",
+    "074": "Vodacom Tanzania PLC",
+    "075": "Vodacom Tanzania PLC",
+    "076": "Vodacom Tanzania PLC",
+    "068": "Airtel Tanzania PLC",
+    "069": "Airtel Tanzania PLC",
+    "078": "Airtel Tanzania PLC",
+    "061": "Viettel Tanzania PLC (Halotel)",
+    "062": "Viettel Tanzania PLC (Halotel)",
+    "073": "Tanzania Telecommunications Corporation (TTCL)",
+    "077": "Zanzibar Telecom PLC (Zantel)",
+    "066": "Smile Communications Tanzania Limited",
+    "063": "Mkulima African Telecommunication Company Limited",
+    "064": "Wiafrica Tanzania Limited",
+    "072": "MO Mobile Holding Limited"
+  }
+}
