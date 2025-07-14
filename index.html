@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzania Carrier Lookup</title>
+    <style>
+        /* --- Basic Setup & Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        :root {
+            --primary-color: #00796b; /* A teal shade inspired by Tanzanian colors */
+            --primary-dark: #004d40;
+            --success-bg: #e8f5e9;
+            --success-text: #2e7d32;
+            --error-bg: #ffebee;
+            --error-text: #c62828;
+            --light-gray: #f0f0f0;
+            --dark-gray: #333;
+            --medium-gray: #666;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        /* --- Main Container --- */
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--dark-gray);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .description {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        /* --- Input & Button --- */
+        .lookup-form {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        #phoneInput {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        #phoneInput:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #checkButton {
+            padding: 12px 20px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #checkButton:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* --- Result Display --- */
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .error {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+        }
+        
+        #result strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" fill="var(--primary-color)"></path>
+            </svg>
+            <h1>TZ Carrier Lookup</h1>
+        </div>
+
+        <p class="description">
+            Enter a Tanzanian phone number to identify its mobile network operator.
+        </p>
+
+        <div class="lookup-form">
+            <input type="tel" id="phoneInput" placeholder="e.g., 0712 345 678">
+            <button id="checkButton">Check</button>
+        </div>
+
+        <div id="result"></div>
+        
+        <div class="footer">
+            Data sourced from TCRA National Numbering Plan (June 2020).
+            This is a best-effort tool; accuracy is not guaranteed due to number portability.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Data from the PDF (Table 6) ---
+            const carrierData = {
+                // MIC Tanzania PLC (Tigo)
+                '065': 'MIC Tanzania PLC (Tigo)',
+                '067': 'MIC Tanzania PLC (Tigo)',
+                '071': 'MIC Tanzania PLC (Tigo)',
+
+                // Vodacom Tanzania PLC
+                '074': 'Vodacom Tanzania PLC',
+                '075': 'Vodacom Tanzania PLC',
+                '076': 'Vodacom Tanzania PLC',
+
+                // Airtel Tanzania PLC
+                '068': 'Airtel Tanzania PLC',
+                '069': 'Airtel Tanzania PLC',
+                '078': 'Airtel Tanzania PLC',
+
+                // Viettel Tanzania PLC (Halotel)
+                '061': 'Viettel Tanzania PLC (Halotel)',
+                '062': 'Viettel Tanzania PLC (Halotel)',
+
+                // Tanzania Telecommunications Corporation (TTCL)
+                '073': 'Tanzania Telecommunications Corporation (TTCL)',
+                
+                // Zanzibar Telecom PLC (Zantel)
+                '077': 'Zanzibar Telecom PLC (Zantel)',
+
+                // Smile Communications Tanzania Limited
+                '066': 'Smile Communications Tanzania Limited',
+                
+                // Mkulima African Telecommunication Company Limited
+                '063': 'Mkulima African Telecommunication Company Limited',
+                
+                // Wiafrica Tanzania Limited
+                '064': 'Wiafrica Tanzania Limited',
+                
+                // MO Mobile Holding Limited
+                '072': 'MO Mobile Holding Limited'
+            };
+
+            const phoneInput = document.getElementById('phoneInput');
+            const checkButton = document.getElementById('checkButton');
+            const resultDiv = document.getElementById('result');
+
+            // --- Function to normalize the phone number ---
+            function normalizePhoneNumber(phone) {
+                // Remove all non-digit characters
+                const cleaned = phone.replace(/[^0-9]/g, '');
+
+                if (cleaned.startsWith('255') && cleaned.length === 12) {
+                    // Format: 255712345678 -> 0712345678
+                    return '0' + cleaned.substring(3);
+                } else if ((cleaned.startsWith('6') || cleaned.startsWith('7')) && cleaned.length === 9) {
+                    // Format: 712345678 -> 0712345678
+                    return '0' + cleaned;
+                } else if (cleaned.startsWith('0') && cleaned.length === 10) {
+                    // Format: 0712345678 (already correct)
+                    return cleaned;
+                }
+                
+                // Return null if format is not recognized
+                return null;
+            }
+            
+            // --- Function to display the result ---
+            function displayResult(message, type) {
+                resultDiv.innerHTML = message;
+                resultDiv.className = ''; // Clear previous classes
+                resultDiv.classList.add(type);
+                resultDiv.style.display = 'block';
+            }
+
+            // --- Main lookup logic ---
+            function lookupCarrier() {
+                const rawNumber = phoneInput.value;
+                
+                if (!rawNumber) {
+                    displayResult('Please enter a phone number.', 'error');
+                    return;
+                }
+
+                const normalizedNumber = normalizePhoneNumber(rawNumber);
+
+                if (!normalizedNumber) {
+                    displayResult('Invalid number format. Please use a valid Tanzanian mobile number.', 'error');
+                    return;
+                }
+
+                const prefix = normalizedNumber.substring(0, 3);
+                const carrier = carrierData[prefix];
+
+                if (carrier) {
+                    const message = `Assigned Carrier: <strong>${carrier}</strong>`;
+                    displayResult(message, 'success');
+                } else {
+                    const message = `Carrier not found for this prefix.`;
+                    displayResult(message, 'error');
+                }
+            }
+
+            // --- Event Listeners ---
+            checkButton.addEventListener('click', lookupCarrier);
+
+            phoneInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent form submission
+                    lookupCarrier();
+                }
+            });
+            
+            // Hide the result when the user starts typing again
+            phoneInput.addEventListener('input', () => {
+                if (resultDiv.style.display !== 'none') {
+                    resultDiv.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
